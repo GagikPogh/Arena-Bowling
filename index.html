@@ -236,3 +236,25 @@ main>section#activities,main>section#activities~section{min-height:100svh}
   setLanguage('HY');
 })();
 </script>
+<script id="arena-translation-integrity">
+(()=>{
+ const words={
+  HY:{ey:['ԱՄԵՆ ԻՆՉ ՁԵՐ ԵՐԵԿՈՅԻ ՀԱՄԱՐ','ՄԻԱՅՆ ՁԵՐ ԸՆԿԵՐՈՒԹՅԱՆ ՀԱՄԱՐ','ՍՆՈՒՆԴ ԵՒ ԽՄԻՉՔՆԵՐ','ՀՅՈՒՐԵՐԻ ԿԱՐԾԻՔՆԵՐ','ԱՄՐԱԳՐՈՒՄ'],heads:['Ընտրեք <em>ձեր</em> ռիթմը։','VIP սենյակ՝ <em>ձեր ընկերության համար։</em>','Համեղ՝ <em>խաղերի միջև։</em>','Arena-ի <em>հյուրերի կարծիքները։</em>','Ամրագրեք <em>ձեր երեկոն Arena-ում։</em>'],vip:'Փակ սենյակ՝ ձեր երեկոյի սեփական սցենարով․ հանգստացեք, խաղացեք և շփվեք ձեր ռիթմով։',options:['Բոուլինգ','VIP սենյակ','Բիլիարդ','Սեղանի թենիս'],prev:'Նախորդ լուսանկարը',next:'Հաջորդ լուսանկարը'},
+  RU:{ey:['Всё для вашего вечера','Только ваша компания','Еда и напитки','Мнения гостей','Бронирование'],heads:['Выбирайте <em>свой</em> ритм.','VIP-комната <em>для вашей компании.</em>','Вкусно <em>между</em> страйками.','Отзывы <em>гостей Arena.</em>','Соберите <em>свой вечер в Arena.</em>'],vip:'Закрытая комната с собственным сценарием вечера: отдыхайте, играйте и общайтесь в своём темпе.',options:['Боулинг','VIP-комната','Бильярд','Настольный теннис'],prev:'Предыдущее фото',next:'Следующее фото'},
+  EN:{ey:['Everything for your evening','Only your group','Food and drinks','Guest reviews','Booking'],heads:['Choose <em>your</em> rhythm.','VIP room <em>for your group.</em>','Delicious <em>between</em> strikes.','Arena <em>guest reviews.</em>','Plan <em>your evening at Arena.</em>'],vip:'A private room for your own evening plan: relax, play and spend time together at your pace.',options:['Bowling','VIP room','Billiards','Table tennis'],prev:'Previous photo',next:'Next photo'}
+ };
+ const apply=lang=>{
+   const t=words[lang]||words.HY;
+   ['#activities','#vip','#menu','#reviews','#booking'].forEach((selector,i)=>{
+     const s=document.querySelector(selector);if(!s)return;
+     const eyebrow=s.querySelector('.eyebrow');if(eyebrow)eyebrow.textContent=t.ey[i];
+     const h=s.querySelector('h2');if(h)h.innerHTML=t.heads[i];
+   });
+   const vip=document.querySelector('#vip .top p');if(vip)vip.textContent=t.vip;
+   document.querySelectorAll('#booking select option').forEach((o,i)=>{if(t.options[i])o.textContent=t.options[i]});
+   document.querySelectorAll('.activity-arrows button').forEach((b,i)=>b.setAttribute('aria-label',i%2?t.next:t.prev));
+ };
+ document.querySelectorAll('.language button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>apply(b.dataset.lang||'HY'),20)));
+ apply('HY');
+})();
+</script>
