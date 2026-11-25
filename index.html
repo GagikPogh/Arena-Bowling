@@ -53,9 +53,16 @@ main > section#activities ~ section{
 <style id="arena-activities-height">
 /* Match the scale of the following full-bleed sections. */
 #activities{
-  min-height:200vh;
-  min-height:200svh;
+  height:200vh !important;
+  height:200svh !important;
+  min-height:200vh !important;
+  min-height:200svh !important;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
 }
+#activities>.activities{width:100%}
 </style>
 </head><body>
 <div class="nav-shell"><div class="wrap nav"><a href="#top" aria-label="Arena High"><img class="logo" src="dist/arena-high-logo.png" alt="Arena High"></a><nav class="links"><a href="#activities">Развлечения</a><a href="#vip">VIP</a><a href="#menu">Меню</a><a href="#reviews">Отзывы</a></nav><a class="btn" href="#booking">Забронировать</a></div></div>
