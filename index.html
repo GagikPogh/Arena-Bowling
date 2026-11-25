@@ -50,19 +50,24 @@ main > section#activities ~ section{
   min-height:100svh;
 }
 </style>
-<style id="arena-activities-height">
-/* Match the scale of the following full-bleed sections. */
+<style id="arena-hero-height">
+/* The first screen is the hero (“Երեկո՝ ձեր ռիթմով”). */
 #activities{
+  height:auto !important;
+  min-height:100vh !important;
+  min-height:100svh !important;
+  display:block;
+}
+.hero{
   height:200vh !important;
   height:200svh !important;
   min-height:200vh !important;
   min-height:200svh !important;
   box-sizing:border-box;
   display:flex;
-  flex-direction:column;
-  justify-content:space-around;
+  align-items:center;
 }
-#activities>.activities{width:100%}
+.hero>.hero-copy{width:100%}
 </style>
 </head><body>
 <div class="nav-shell"><div class="wrap nav"><a href="#top" aria-label="Arena High"><img class="logo" src="dist/arena-high-logo.png" alt="Arena High"></a><nav class="links"><a href="#activities">Развлечения</a><a href="#vip">VIP</a><a href="#menu">Меню</a><a href="#reviews">Отзывы</a></nav><a class="btn" href="#booking">Забронировать</a></div></div>
