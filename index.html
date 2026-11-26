@@ -430,7 +430,7 @@ main>section#activities,main>section#activities~section{min-height:100svh}
    all('#activities .activity').forEach((card,i)=>{
      const v=activities[i];if(!v)return;
      const bottom=card.querySelector('.card-bottom'),detail=card.querySelector('.detail');
-     if(bottom){text('.card-bottom h3',v[0]);const p=bottom.querySelector('p');if(p)p.textContent=v[1]}
+     if(bottom){const title=bottom.querySelector('h3');if(title)title.textContent=v[0];const p=bottom.querySelector('p');if(p)p.textContent=v[1]}
      if(detail){const h3=detail.querySelector('h3'),strong=detail.querySelector('strong'),small=detail.querySelector('small');if(h3)h3.textContent=v[0];if(strong)strong.textContent=v[2];if(small)small.textContent=v[3]}
    });
    text('#vip .eyebrow','ՄԻԱՅՆ ՁԵՐ ԸՆԿԵՐՈՒԹՅԱՆ ՀԱՄԱՐ');
