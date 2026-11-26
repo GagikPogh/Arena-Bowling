@@ -306,3 +306,58 @@ main>section#activities,main>section#activities~section{min-height:100svh}
   .hero-copy{padding-top:125px!important}
 }
 </style>
+<style id="arena-gallery-repair">
+.activity img{background:#0a1020}
+.activity-arrows{z-index:12!important}
+</style>
+<script id="arena-gallery-repair">
+(()=>{
+ const galleries=[
+  [
+   'https://fithub.am/storage/partners/images/01KNH8YAZHJQ4DMCMZ4QT7FXG1.jpg',
+   'https://visityerevan.am/media/images/b335495790_225398059901486_7834341483426245308_n.jpg',
+   'https://fithub.am/storage/partners/images/01KNH8YB0JKNJ5CRHNC6BVEXCD.jpg',
+   'https://visityerevan.am/media/images/b307691267_5331897520261815_5004576569201719464_n.jpg'
+  ],
+  [
+   'https://fithub.am/storage/partners/images/01KNH8YB09TVKXETDZ0Q5GMPGB.jpg',
+   'https://fithub.am/storage/partners/images/01KNH8YB0JKNJ5CRHNC6BVEXCD.jpg',
+   'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/58/46/4f/arena-entertainment-centre.jpg?h=1200&s=1&w=1200'
+  ],
+  [
+   'https://visityerevan.am/media/images/b335495790_225398059901486_7834341483426245308_n.jpg',
+   'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/58/46/4f/arena-entertainment-centre.jpg?h=1200&s=1&w=1200'
+  ],
+  [
+   'https://fithub.am/storage/partners/images/01KNH8YB04DYNVGHT02BCKEQF7.jpg',
+   'https://visityerevan.am/media/images/b307691267_5331897520261815_5004576569201719464_n.jpg'
+  ]
+ ];
+ document.querySelectorAll('.activity').forEach((card,cardIndex)=>{
+   const gallery=galleries[cardIndex];if(!gallery)return;
+   const image=card.querySelector('img');let position=0,repairing=false;
+   const show=(next)=>{
+     position=(next+gallery.length)%gallery.length;
+     repairing=true;image.src=gallery[position];image.loading='eager';
+     image.addEventListener('load',()=>{repairing=false},{once:true});
+   };
+   const recover=()=>{if(repairing)return;show(0)};
+   image.onerror=recover;
+   new MutationObserver(()=>{
+     const src=image.getAttribute('src')||'';
+     if(/mayak\.app|QT7G1\.jpg/i.test(src))recover();
+   }).observe(image,{attributes:true,attributeFilter:['src']});
+   show(0);
+   card.querySelectorAll('.activity-arrow').forEach((old,index)=>{
+     const button=old.cloneNode(true);
+     old.replaceWith(button);
+     button.type='button';
+     button.setAttribute('aria-label',index?'Հաջորդ լուսանկարը':'Նախորդ լուսանկարը');
+     button.addEventListener('click',event=>{
+       event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
+       show(position+(index?1:-1));
+     },true);
+   });
+ });
+})();
+</script>
