@@ -258,3 +258,38 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  apply('HY');
 })();
 </script>
+<style id="arena-access-gate">
+.arena-gate{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 80% 8%,#4d2f8e75,transparent 36%),linear-gradient(135deg,#060914 0%,#111a35 55%,#071022 100%);color:#f6f7fb}
+.arena-gate[hidden]{display:none}
+.arena-gate__card{width:min(440px,100%);padding:34px;border:1px solid #ffffff26;border-radius:22px;background:#0c1325e8;box-shadow:0 30px 90px #0009;backdrop-filter:blur(20px);text-align:center}
+.arena-gate__logo{width:160px;height:72px;object-fit:contain;margin:0 auto 16px}
+.arena-gate h1{font:800 clamp(30px,7vw,45px)/1 Space Grotesk,sans-serif;letter-spacing:-.055em;margin:0 0 12px}
+.arena-gate p{margin:0 0 24px;color:#cbd3e4;line-height:1.55}
+.arena-gate form{display:grid;gap:11px}
+.arena-gate label{text-align:left;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#c8e85d}
+.arena-gate input{width:100%;padding:15px 16px;border:1px solid #ffffff2b;border-radius:10px;background:#060b16;color:#fff;font:700 20px/1.2 Manrope,sans-serif;letter-spacing:.18em;text-align:center;outline:none}
+.arena-gate input:focus{border-color:#c8e85d;box-shadow:0 0 0 4px #c8e85d22}
+.arena-gate button{border:0;border-radius:10px;padding:15px;background:#c8e85d;color:#101724;font:800 14px Manrope,sans-serif;cursor:pointer}
+.arena-gate__error{min-height:20px;margin:2px 0 0;color:#ff98b6;font-size:13px}
+</style>
+<script id="arena-access-gate-script">
+(()=>{
+ const key='arena_beta_access_v1';
+ if(sessionStorage.getItem(key)==='granted')return;
+ const logo=document.querySelector('.logo')?.src||'';
+ const gate=document.createElement('div');
+ gate.className='arena-gate';gate.id='arena-access-gate';
+ gate.innerHTML='<div class="arena-gate__card" role="dialog" aria-modal="true" aria-labelledby="arena-gate-title">'+
+   (logo?'<img class="arena-gate__logo" src="'+logo+'" alt="Arena High">':'')+
+   '<h1 id="arena-gate-title">Բետա մուտք</h1><p>Կայքը փորձնական տարբերակում է։ Մուտք գործելու համար գրեք գաղտնաբառը։</p>'+
+   '<form><label for="arena-gate-password">Գաղտնաբառ</label><input id="arena-gate-password" type="password" inputmode="numeric" autocomplete="current-password" required autofocus><button type="submit">Մուտք գործել</button><div class="arena-gate__error" aria-live="polite"></div></form></div>';
+ document.body.append(gate);
+ const input=gate.querySelector('input'),error=gate.querySelector('.arena-gate__error');
+ gate.querySelector('form').addEventListener('submit',e=>{
+   e.preventDefault();
+   if(input.value==='1177'){sessionStorage.setItem(key,'granted');gate.remove();document.body.style.overflow='';}
+   else{error.textContent='Գաղտնաբառը սխալ է։ Փորձեք կրկին։';input.value='';input.focus();}
+ });
+ document.body.style.overflow='hidden';setTimeout(()=>input.focus(),0);
+})();
+</script>
