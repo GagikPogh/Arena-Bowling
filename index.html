@@ -365,3 +365,41 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  });
 })();
 </script>
+<style id="arena-bowling-gallery-final">
+#activities .activity:first-child .bowling-gallery{position:absolute;inset:0;z-index:-2;background:#07101c;overflow:hidden}
+#activities .activity:first-child .bowling-slide{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transform:scale(1.035);transition:opacity .38s ease,transform .7s ease}
+#activities .activity:first-child .bowling-slide.is-active{opacity:1;transform:scale(1)}
+#activities .activity:first-child .activity-arrows{z-index:20!important}
+</style>
+<script id="arena-bowling-gallery-final">
+(()=>{
+ const photos=[
+  'https://fithub.am/storage/partners/images/01KNH8YAZHJQ4DMCMZ4QT7FXG1.jpg',
+  'https://visityerevan.am/media/images/b321879912_695629992131368_5992734085569363194_n.jpg',
+  'https://visityerevan.am/media/images/b318738274_135261539335095_3659675126623617720_n.jpg',
+  'https://visityerevan.am/media/images/b307691267_5331897520261815_5004576569201719464_n.jpg',
+  'https://visityerevan.am/media/images/b334418055_1187662618610531_8268027881177505027_n.jpg',
+  'https://api.biglemon.am/storage/offers/1757319165013_937cc8af-3b1a-4eac-a42e-b786cdc2c0b9.jpg',
+  'https://api.biglemon.am/storage/offers/1757319164978_77c69e80-212d-4f77-a721-42e6078abca3.jpg',
+  'https://d31qtdfy11mjj9.cloudfront.net/gallery/1564652210826908315.jpg',
+  'https://abp-am.storage.yandexcloud.net/page/image/988c7875-ffa0-4659-bb4d-3be091e51e05.jpg'
+ ];
+ const card=document.querySelector('#activities .activity:first-child');
+ if(!card)return;
+ card.querySelector('img')?.remove();
+ card.querySelector('.bowling-gallery')?.remove();
+ const gallery=document.createElement('div');gallery.className='bowling-gallery';gallery.setAttribute('aria-label','Ֆոտոշարք՝ բոուլինգ');
+ const slides=photos.map((url,index)=>{const s=document.createElement('div');s.className='bowling-slide'+(!index?' is-active':'');s.style.backgroundImage='url("'+url+'")';gallery.append(s);return s});
+ card.prepend(gallery);
+ card.querySelector('.activity-arrows')?.remove();
+ const arrows=document.createElement('div');arrows.className='activity-arrows';
+ const previous=document.createElement('button'),next=document.createElement('button');
+ previous.type=next.type='button';previous.className=next.className='activity-arrow';
+ previous.textContent='‹';next.textContent='›';previous.setAttribute('aria-label','Նախորդ լուսանկարը');next.setAttribute('aria-label','Հաջորդ լուսանկարը');
+ arrows.append(previous,next);card.append(arrows);
+ let current=0;
+ const show=step=>{current=(current+step+slides.length)%slides.length;slides.forEach((slide,index)=>slide.classList.toggle('is-active',index===current))};
+ previous.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();show(-1)});
+ next.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();show(1)});
+})();
+</script>
