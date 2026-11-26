@@ -345,7 +345,7 @@ main>section#activities,main>section#activities~section{min-height:100svh}
    image.onerror=recover;
    new MutationObserver(()=>{
      const src=image.getAttribute('src')||'';
-     if(/mayak\.app|QT7G1\.jpg/i.test(src))recover();
+     if(!gallery.includes(src))recover();
    }).observe(image,{attributes:true,attributeFilter:['src']});
    show(0);
    card.querySelectorAll('.activity-arrow').forEach((old,index)=>{
