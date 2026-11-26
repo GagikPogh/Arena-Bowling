@@ -403,3 +403,70 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  next.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();show(1)});
 })();
 </script>
+<script id="arena-armenian-copy-final">
+(()=>{
+ const text=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value};
+ const html=(selector,value)=>{const el=document.querySelector(selector);if(el)el.innerHTML=value};
+ const all=(selector)=>[...document.querySelectorAll(selector)];
+ const setList=(selector,values,prop='textContent')=>all(selector).forEach((el,i)=>{if(values[i]!==undefined)el[prop]=values[i]});
+ const hy=()=>{
+   document.documentElement.lang='hy';
+   setList('.links a',['Ժամանց','VIP սենյակներ','Մենյու','Կարծիքներ']);
+   text('.nav-right .btn','Ամրագրել');
+   text('.hero-copy .eyebrow','ԵՐԵՎԱՆ · ՄԱՇՏՈՑԻ ՊՈՂՈՏԱ 8');
+   html('.hero-copy h1','Երեկո՝ <em>ձեր</em> ռիթմով։');
+   text('.hero-copy p','Բոուլինգ, բիլիարդ, սեղանի թենիս, խաղային ավտոմատներ և փակ VIP սենյակներ՝ ընկերների հետ անմոռանալի ժամանցի համար։');
+   text('.hero-copy .btn','Ամրագրել');
+   setList('.pills span',['5 բոուլինգի գիծ','Բիլիարդ','VIP սենյակներ','Ամեն օր՝ 10:00–00:00']);
+   text('#activities .eyebrow','ԱՄԵՆ ԻՆՉ՝ ՀԱՃԵԼԻ ԵՐԵԿՈՅԻ ՀԱՄԱՐ');
+   html('#activities h2','Ընտրեք <em>ձեր</em> ժամանցը։');
+   text('#activities .top p','Arena-ի իրական լուսանկարներ։ Յուրաքանչյուր քարտի սլաքներով դիտեք ավելի շատ լուսանկարներ։');
+   const activities=[
+     ['Բոուլինգ','Հինգ գիծ, լույսեր և թիմային խաղի ոգի։','Գծի ամրագրում','Ընկերների, ընտանիքի և տոնական օրերի համար։ Ազատ ժամերը ճշտեք հեռախոսով։'],
+     ['Բիլիարդ','Ռուսական բիլիարդ և ամերիկյան փուլ։','Ռուսական կամ ամերիկյան բիլիարդ','Ընտրեք խաղի ձևաչափը և նախապես ամրագրեք սեղանը։'],
+     ['Սեղանի թենիս','Արագ ու հետաքրքիր խաղ՝ դեմ առ դեմ։','Խաղ՝ ձեր ռիթմով','Ավելացրեք ակտիվ և թեթև խաղ ձեր երեկոյին։'],
+     ['Խաղային ավտոմատներ','Կարճ խաղեր, վառ տպավորություններ։','Ընտրեք ձեր խաղը','Եվս մեկ տարբերակ՝ երեկոյին էներգիա հաղորդելու համար։']
+   ];
+   all('#activities .activity').forEach((card,i)=>{
+     const v=activities[i];if(!v)return;
+     const bottom=card.querySelector('.card-bottom'),detail=card.querySelector('.detail');
+     if(bottom){text('.card-bottom h3',v[0]);const p=bottom.querySelector('p');if(p)p.textContent=v[1]}
+     if(detail){const h3=detail.querySelector('h3'),strong=detail.querySelector('strong'),small=detail.querySelector('small');if(h3)h3.textContent=v[0];if(strong)strong.textContent=v[2];if(small)small.textContent=v[3]}
+   });
+   text('#vip .eyebrow','ՄԻԱՅՆ ՁԵՐ ԸՆԿԵՐՈՒԹՅԱՆ ՀԱՄԱՐ');
+   html('#vip h2','VIP սենյակ՝ <em>ձեր ընկերության համար։</em>');
+   text('#vip .top p','Փակ սենյակ՝ ձեր երեկոյի սեփական սցենարի համար․ հանգստացեք, խաղացեք և շփվեք ձեր ռիթմով։');
+   const vip=[
+     ['Ձեր անձնական սենյակը','Միայն ձեր ընկերության համար նախատեսված փակ տարածք՝ հանդիպումների, տոների և հանգստի համար։','ՄԻԱՅՆ ՁԵՐ ԸՆԿԵՐՈՒԹՅԱՆ ՀԱՄԱՐ'],
+     ['Բիլիարդ','Սենյակում կարող եք խաղալ ռուսական բիլիարդ կամ ամերիկյան փուլ՝ միայն ձեր ընկերության հետ։','ՌՈՒՍԱԿԱՆ / ԱՄԵՐԻԿՅԱՆ'],
+     ['Ձեր տրամադրությամբ','Պատվիրեք կալյան, միացրեք ձեր երաժշտությունը և ավելացրեք PlayStation։','ԿԱԼՅԱՆ · PLAYSTATION · ԵՐԱԺՇՏՈՒԹՅՈՒՆ']
+   ];
+   all('#vip .vipcard').forEach((card,i)=>{const v=vip[i];if(!v)return;const h3=card.querySelector('h3'),p=card.querySelector('p'),s=card.querySelector('small');if(h3)h3.textContent=v[0];if(p)p.textContent=v[1];if(s)s.textContent=v[2]});
+   text('#menu .eyebrow','ՍՆՈՒՆԴ ԵՎ ԽՄԻՔՆԵՐ');
+   html('#menu h2','Համեղ <em>ուտեստներ</em>');
+   text('#menu .top p','Հպեք քարտին կամ պահեք կուրսորը դրա վրա՝ օրինակելի ուտեստներն ու գները տեսնելու համար։ Ակտուալ մենյուն ճշտեք Arena-ում։');
+   setList('#menu .menu-title h3',['Պիցցա','Նախուտեստներ','Խմիչքներ','Ընկերության համար']);
+   setList('#menu .menu-title small',['Tifosi՝ ընկերության համար','Սեղանի կենտրոնում և խաղի ընթացքում','Թարմացեք և շարունակեք խաղը','Պատվիրեք նախապես']);
+   setList('#menu .prices span',['Մարգարիտա','Պեպերոնի','Մսային','Կարտոֆիլ ֆրի','Թևիկներ','Պանրային ձողիկներ','Լիմոնադ','Սուրճ','Կոկտեյլներ','Նախուտեստների սեթ','Տոնական սեղան','VIP մատուցում']);
+   all('#menu .prices b').forEach(el=>{const raw=el.textContent.replace(/^(от |սկսած |from )/,'').replace(/^(по запросу|հարցմամբ|on request)$/,'');el.textContent=/հարց|request|запрос/i.test(el.textContent)?'գինը՝ ըստ հարցման':'սկսած '+raw});
+   text('#menu .note','Քարտերում նշված գները կողմնորոշիչ են․ ակտուալ գները ճշտեք Arena-ում։');
+   text('#reviews .eyebrow','ՀՅՈՒՐԵՐԻ ԿԱՐԾԻՔՆԵՐ');
+   html('#reviews h2','Arena-ի <em>հյուրերի կարծիքները։</em>');
+   const prev=document.getElementById('prev'),next=document.getElementById('next');if(prev)prev.setAttribute('aria-label','Նախորդ կարծիքներ');if(next)next.setAttribute('aria-label','Հաջորդ կարծիքներ');
+   setList('.review .source',Array(all('.review .source').length).fill('Դիտել բնօրինակը'));
+   text('#booking .eyebrow','ԱՄՐԱԳՐՈՒՄ');
+   html('#booking h2','Ամրագրեք <em>ձեր երեկոն Arena-ում։</em>');
+   setList('#booking .field label',['ՁԵՐ ԱՆՈՒՆԸ','ՀԵՌԱԽՈՍ','ԱՄՍԱԹԻՎ','ՁԵՎԱՉԱՓ','ՆՇՈՒՄ']);
+   const fields=all('#booking input, #booking textarea');if(fields[0])fields[0].placeholder='Անուն';if(fields[1])fields[1].placeholder='+374';if(fields[3])fields[3].placeholder='Օրինակ՝ հյուրերի քանակ, VIP-ի ցանկություն';
+   setList('#booking select option',['Բոուլինգ','VIP սենյակ','Բիլիարդ','Սեղանի թենիս']);
+   text('#booking button[type="submit"]','Ուղարկել հարցումը');
+   const result=document.querySelector('#form-result');if(result&&result.firstChild)result.firstChild.textContent='Կամ զանգահարեք՝ ';
+   const map=document.querySelector('.arena-directions');if(map)map.textContent='⌖ Բացել քարտեզը';
+   text('.footer span:first-child','© 2026 ARENA · Երևան');
+   const credit=document.querySelector('.footer span:last-child');if(credit){const a=credit.querySelector('a');credit.textContent='Website created by ';if(a)credit.append(a)}
+   all('.activity-arrows button').forEach((button,i)=>button.setAttribute('aria-label',i%2?'Հաջորդ լուսանկարը':'Նախորդ լուսանկարը'));
+ };
+ hy();
+ document.querySelectorAll('.language button').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.lang==='HY')setTimeout(hy,80)}));
+})();
+</script>
