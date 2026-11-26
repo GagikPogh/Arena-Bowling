@@ -170,7 +170,7 @@ main>section#activities,main>section#activities~section{min-height:100svh}
   const mapUrl='https://www.google.com/maps/search/?api=1&query=Arena%20Entertainment%20Centre%2C%20Mashtots%208%2C%20Yerevan';
   const copy={
     HY:{
-      menuTitle:'Համեղ՝ խաղերի միջև։',menuNote:'Քարտերում նշված գները կողմնորոշիչ են․ ակտուալ գները ճշտեք Arena-ում։',
+      menuTitle:'Համեղ <em>ուտեստներ</em>',menuNote:'Քարտերում նշված գները կողմնորոշիչ են․ ակտուալ գները ճշտեք Arena-ում։',
       vipMeta:['ՄԻԱՅՆ ՁԵՐ ԸՆԿԵՐՈՒԹՅԱՆ ՀԱՄԱՐ','ՌՈՒՍԱԿԱՆ / ԱՄԵՐԻԿՅԱՆ','ԿԱԼՅԱՆ · PLAYSTATION · ԵՐԱԺՇՏՈՒԹՅՈՒՆ'],
       pricePrefix:'սկսած ',request:'հարցմամբ',directions:'Բացել քարտեզը',call:'Կամ զանգահարեք՝',
       bookingTitle:'Ամրագրեք ձեր երեկոն Arena-ում։',sent:'Բացվում է WhatsApp-ը՝ հարցումն ուղարկելու համար։',
@@ -292,4 +292,17 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  });
  document.body.style.overflow='hidden';setTimeout(()=>input.focus(),0);
 })();
-</script>
+</script><style id="arena-mobile-header-repair">
+@media(max-width:700px){
+  .nav-shell{height:66px}
+  .nav-shell .wrap.nav{height:66px!important;padding:0 13px!important;gap:8px!important;min-width:0}
+  .nav>.links,.links{display:none!important}
+  .nav a.logo{display:flex;align-items:center;flex:0 0 auto;min-width:0}
+  .nav .logo{width:105px!important;height:46px!important;max-width:30vw;object-position:left center}
+  .nav-right{margin-left:auto!important;display:flex!important;align-items:center!important;gap:5px!important;min-width:0}
+  .nav-right .btn{padding:10px 10px!important;min-width:auto!important;font-size:10px!important;white-space:nowrap}
+  .nav-right .language{display:flex!important;gap:1px!important;transform:none!important}
+  .nav-right .language button{min-width:29px!important;height:29px!important;padding:0 6px!important;font-size:10px!important}
+  .hero-copy{padding-top:125px!important}
+}
+</style>
