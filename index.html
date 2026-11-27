@@ -470,3 +470,65 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  document.querySelectorAll('.language button').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.lang==='HY')setTimeout(hy,80)}));
 })();
 </script>
+
+<style id="arena-real-photos-final">
+#activities .activity:first-child .bowling-gallery,
+#activities .activity .arena-arcade-gallery{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#070a18}
+#activities .activity:first-child .bowling-slide,
+#activities .activity .arena-arcade-slide{position:absolute;inset:0;opacity:0;background:center/cover no-repeat;transform:scale(1.035);transition:opacity .38s ease,transform .7s ease}
+#activities .activity:first-child .bowling-slide.is-active,
+#activities .activity .arena-arcade-slide.is-active{opacity:1;transform:scale(1)}
+#activities .activity .arena-arcade-gallery{background:#0a0713}
+#activities .activity .arena-arcade-gallery::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,4,14,.06) 28%,rgba(5,4,14,.70) 100%);pointer-events:none}
+#activities .activity .arena-arcade-gallery{isolation:isolate}
+#activities .activity .arena-arcade-slide{background-position:center}
+#activities .activity:nth-child(4) .activity-arrows{z-index:20!important}
+#vip.arena-real-vip-photo{background-image:linear-gradient(90deg,rgba(7,6,18,.91) 0%,rgba(7,6,18,.63) 49%,rgba(7,6,18,.52) 100%),url("assets/arena/vip-pool.jpg")!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center 47%!important}
+@media (max-width:700px){
+ #vip.arena-real-vip-photo{background-position:58% center!important}
+ #activities .activity .arena-arcade-slide{background-position:center center}
+}
+</style>
+<script id="arena-real-photos-final">
+(()=>{
+ const makeGallery=(card,className,slideClass,photos,label)=>{
+   if(!card)return;
+   card.querySelector('img')?.remove();
+   card.querySelector('.'+className)?.remove();
+   const gallery=document.createElement('div');
+   gallery.className=className;gallery.setAttribute('aria-label',label);
+   const slides=photos.map((url,index)=>{
+     const slide=document.createElement('div');
+     slide.className=slideClass+(index===0?' is-active':'');
+     slide.style.backgroundImage='url("'+url+'")';
+     gallery.append(slide);return slide;
+   });
+   card.prepend(gallery);
+   card.querySelector('.activity-arrows')?.remove();
+   const arrows=document.createElement('div');arrows.className='activity-arrows';
+   const previous=document.createElement('button'),next=document.createElement('button');
+   previous.type=next.type='button';previous.className=next.className='activity-arrow';
+   previous.textContent='‹';next.textContent='›';
+   previous.setAttribute('aria-label','Նախորդ լուսանկարը');next.setAttribute('aria-label','Հաջորդ լուսանկարը');
+   arrows.append(previous,next);card.append(arrows);
+   let current=0;
+   const show=(step)=>{
+     current=(current+step+slides.length)%slides.length;
+     slides.forEach((slide,index)=>slide.classList.toggle('is-active',index===current));
+   };
+   previous.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();show(-1)});
+   next.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();show(1)});
+ };
+ const cards=[...document.querySelectorAll('#activities .activity')];
+ makeGallery(cards[0],'bowling-gallery','bowling-slide',[
+   'assets/arena/bowling-hall.jpg',
+   'assets/arena/bowling-club.jpg'
+ ],'Ֆոտոշարք՝ բոուլինգ');
+ makeGallery(cards[3],'arena-arcade-gallery','arena-arcade-slide',[
+   'assets/arena/arcade-basketball.jpg',
+   'assets/arena/arcade-punch.jpg',
+   'assets/arena/arcade-prizes.jpg'
+ ],'Խաղային ավտոմատների ֆոտոշարք');
+ document.querySelector('#vip')?.classList.add('arena-real-vip-photo');
+})();
+</script>
