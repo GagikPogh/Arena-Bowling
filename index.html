@@ -639,7 +639,7 @@ main>section#activities,main>section#activities~section{min-height:100svh}
 </script>
 
 <style id="arena-card-gallery-final-fix">
-#activities .activity{position:relative!important;isolation:isolate!important;height:clamp(430px,42vw,650px)!important;min-height:0!important;overflow:hidden!important}
+#activities .activity{position:relative!important;isolation:isolate!important;overflow:hidden!important}
 #activities .activity .arena-visual-gallery{position:absolute!important;inset:0!important;z-index:0!important;display:block!important;background:#090719!important;pointer-events:none!important}
 #activities .activity .arena-visual-gallery img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center!important;opacity:0!important;transform:scale(1.025)!important;transition:opacity .32s ease,transform .52s ease!important;filter:none!important}
 #activities .activity .arena-visual-gallery img.is-current{opacity:1!important;transform:scale(1)!important}
@@ -693,6 +693,56 @@ main>section#activities,main>section#activities~section{min-height:100svh}
    };
    previous.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();show(-1)},true);
    next.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();show(1)},true);
+ });
+})();
+</script>
+
+<style id="arena-gallery-motion-polish">
+#activities .activity .arena-visual-gallery img{transition:opacity .58s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)!important;will-change:opacity,transform}
+#activities .activity .arena-visual-gallery img:not(.is-current){transform:scale(1.06)!important}
+#activities .activity .arena-visual-gallery img.is-current{transform:scale(1)!important}
+#activities .activity .activity-gallery-status{transition:transform .28s cubic-bezier(.22,1,.36,1),background .28s ease!important}
+#activities .activity .activity-gallery-status.is-changing{transform:translateY(-2px) scale(1.045)!important;background:rgba(43,33,85,.72)!important}
+</style>
+<script id="arena-gallery-controls-polish">
+(()=>{
+ const cards=[...document.querySelectorAll('#activities .activity')];
+ cards.forEach(card=>{
+   const images=[...card.querySelectorAll('.arena-visual-gallery img')];
+   const status=card.querySelector('.activity-gallery-status');
+   if(!images.length||!status)return;
+   card.querySelector('.activity-arrows')?.remove();
+   const controls=document.createElement('div');controls.className='activity-arrows';
+   const previous=document.createElement('button'),next=document.createElement('button');
+   previous.type=next.type='button';previous.className=next.className='activity-arrow';
+   previous.textContent='‹';next.textContent='›';
+   previous.setAttribute('aria-label','Նախորդ լուսանկարը');next.setAttribute('aria-label','Հաջորդ լուսանկարը');
+   controls.append(previous,next);card.append(controls);
+   let current=Math.max(0,images.findIndex(image=>image.classList.contains('is-current')));
+   const label=status.querySelector('.current');
+   const render=step=>{
+     if(images.length<2)return;
+     current=(current+step+images.length)%images.length;
+     images.forEach((image,index)=>image.classList.toggle('is-current',index===current));
+     if(label)label.textContent=String(current+1);
+     status.classList.remove('is-changing');
+     requestAnimationFrame(()=>status.classList.add('is-changing'));
+     window.setTimeout(()=>status.classList.remove('is-changing'),260);
+   };
+   if(images.length===1){
+     previous.disabled=true;next.disabled=true;
+     previous.setAttribute('aria-disabled','true');next.setAttribute('aria-disabled','true');
+     return;
+   }
+   let lastPointer=0;
+   const pointer=(event,step)=>{
+     event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
+     lastPointer=Date.now();render(step);
+   };
+   previous.onpointerup=event=>pointer(event,-1);
+   next.onpointerup=event=>pointer(event,1);
+   previous.onclick=event=>{if(Date.now()-lastPointer<450){event.preventDefault();return}pointer(event,-1)};
+   next.onclick=event=>{if(Date.now()-lastPointer<450){event.preventDefault();return}pointer(event,1)};
  });
 })();
 </script>
