@@ -448,4 +448,19 @@ main>section#activities,main>section#activities~section{min-height:100svh}
     max-height:370px!important;
   }
 }
+</style><style id="arena-shooting-card-label-repair">
+#activities .shooting-card .card-bottom{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  z-index:12!important;
+  color:#fff!important;
+  text-shadow:0 2px 14px #000b!important;
+}
+#activities .shooting-card .card-bottom h3,
+#activities .shooting-card .card-bottom p{display:block!important;visibility:visible!important;color:#fff!important}
 </style>
+<script id="arena-shooting-card-label-repair-script">
+(()=>{const card=document.querySelector('#activities .shooting-card');if(!card)return;let bottom=card.querySelector('.card-bottom');if(!bottom){bottom=document.createElement('div');bottom.className='card-bottom';card.append(bottom)}if(!bottom.querySelector('h3'))bottom.insertAdjacentHTML('afterbegin','<h3>Тир</h3>');if(!bottom.querySelector('p'))bottom.insertAdjacentHTML('beforeend','<p>Новый соревновательный формат для вечера.</p>')})();
+</script>
