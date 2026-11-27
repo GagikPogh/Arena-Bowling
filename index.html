@@ -463,4 +463,19 @@ main>section#activities,main>section#activities~section{min-height:100svh}
 </style>
 <script id="arena-shooting-card-label-repair-script">
 (()=>{const card=document.querySelector('#activities .shooting-card');if(!card)return;let bottom=card.querySelector('.card-bottom');if(!bottom){bottom=document.createElement('div');bottom.className='card-bottom';card.append(bottom)}if(!bottom.querySelector('h3'))bottom.insertAdjacentHTML('afterbegin','<h3>Тир</h3>');if(!bottom.querySelector('p'))bottom.insertAdjacentHTML('beforeend','<p>Новый соревновательный формат для вечера.</p>')})();
+</script><style id="arena-shooting-title-overlay">
+#activities .shooting-card{position:relative!important;isolation:isolate!important}
+#activities .shooting-card .shooting-card-title{
+  position:absolute!important;left:0!important;right:0!important;bottom:0!important;z-index:99!important;
+  display:flex!important;flex-direction:column!important;gap:4px!important;padding:42px 18px 18px!important;
+  color:#fff!important;visibility:visible!important;opacity:1!important;
+  background:linear-gradient(transparent,rgba(2,5,14,.9))!important;
+  pointer-events:none!important;
+}
+#activities .shooting-card .shooting-card-title strong{display:block!important;color:#fff!important;font:700 clamp(24px,2.2vw,32px)/1 'Space Grotesk',sans-serif!important;text-shadow:0 2px 13px #000!important}
+#activities .shooting-card .shooting-card-title span{display:block!important;color:#f4f6fb!important;font-size:13px!important;line-height:1.35!important;text-shadow:0 1px 8px #000!important}
+#activities .shooting-card .card-bottom{display:none!important}
+</style>
+<script id="arena-shooting-title-overlay-script">
+(()=>{const card=document.querySelector('#activities .shooting-card');if(!card)return;let overlay=card.querySelector('.shooting-card-title');if(!overlay){overlay=document.createElement('div');overlay.className='shooting-card-title';card.append(overlay)}const copy={RU:['Тир','Новый соревновательный формат для вечера.'],HY:['Տիր','Նոր մրցակցային խաղային ձևաչափ ձեր երեկոյի համար։'],EN:['Shooting gallery','A new competitive activity for your evening.']};const render=()=>{const lang=document.querySelector('.language button.active')?.dataset.lang||'HY';const text=copy[lang]||copy.HY;overlay.innerHTML='<strong>'+text[0]+'</strong><span>'+text[1]+'</span>'};render();document.querySelectorAll('.language button').forEach(button=>button.addEventListener('click',()=>setTimeout(render,100)))})();
 </script>
