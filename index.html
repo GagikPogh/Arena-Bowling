@@ -179,6 +179,7 @@ main > section#activities ~ section{
     set(document.querySelector('.footerin > span:first-child'),d.footer);const creator=document.querySelector('.footerin > span:last-child');if(creator&&creator.firstChild)creator.firstChild.textContent=d.creator;
     const map=document.querySelector('.hero-map-quick span');if(map)map.textContent=lang==='HY'?'Մաշտոցի 8':lang==='RU'?'пр. Маштоца, 8':'8 Mashtots Ave.';
   };
+  window.arenaI18nApply=apply;
   const current=()=>document.querySelector('.language button.active')?.dataset.lang||'HY';
   const boot=()=>{apply(current());document.addEventListener('click',event=>{const button=event.target.closest('.language button[data-lang]');if(button)setTimeout(()=>apply(button.dataset.lang),180);});};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,350));else setTimeout(boot,350);
@@ -685,6 +686,16 @@ body.arena-gate-open{position:fixed!important;inset:0!important;width:100%!impor
 #activities .shooting-card.shooting-card-fixed>.card-bottom h3{font-size:30px!important;margin:0 0 6px!important}
 #activities .shooting-card.shooting-card-fixed>.detail,#activities .shooting-card.shooting-card-fixed>.activity-arrows,#activities .shooting-card.shooting-card-fixed>.activity-gallery-status,#activities .shooting-card.shooting-card-fixed>.shooting-card-title{display:none!important}
 </style>
+<script id="arena-i18n-final-enforcer">
+/* Runs after the page has finished loading, overriding legacy translation scripts. */
+(()=>{
+  const apply=()=>window.arenaI18nApply?.(document.querySelector('.language button.active')?.dataset.lang||'HY');
+  window.addEventListener('load',()=>{apply();setTimeout(apply,450);});
+  document.addEventListener('click',event=>{
+    if(event.target.closest('.language button[data-lang]'))setTimeout(apply,280);
+  });
+})();
+</script>
 <script id="arena-shooting-card-single-stable-script">
 (()=>{const card=document.querySelector('#activities .shooting-card');if(!card)return;card.classList.add('shooting-card-fixed');card.querySelectorAll(':scope > img,:scope > .clean-gallery,:scope > .shooting-single-photo,:scope > .activity-arrows,:scope > .activity-gallery-status,:scope > .shooting-card-title').forEach(x=>x.remove());let bottom=card.querySelector(':scope > .card-bottom');if(!bottom){bottom=document.createElement('div');bottom.className='card-bottom';card.append(bottom)}const photo=document.createElement('div');photo.className='shooting-single-photo';photo.innerHTML='<img src="assets/arena/shooting-gallery.jpg" alt="Shooting gallery at Arena">';card.prepend(photo);const texts={HY:['Տիր','Նոր մրցակցային խաղային ձևաչափ ձեր երեկոյի համար։'],RU:['Тир','Новый соревновательный формат для вечера.'],EN:['Shooting gallery','A new competitive format for your evening.']};const render=()=>{const lang=document.querySelector('.language button.active')?.dataset.lang||'HY';const t=texts[lang]||texts.HY;bottom.innerHTML='<h3>'+t[0]+'</h3><p>'+t[1]+'</p>'};render();document.querySelectorAll('.language button').forEach(b=>b.addEventListener('click',()=>setTimeout(render,120)))})();
 </script>
