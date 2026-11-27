@@ -810,3 +810,30 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  });
 })();
 </script>
+
+<style id="arena-gallery-layer-repair">
+#activities .activity > img,
+#activities .activity > .bowling-gallery,
+#activities .activity > .arena-arcade-gallery,
+#activities .activity > .arena-card-gallery,
+#activities .activity > .arena-visual-gallery{display:none!important}
+#activities .activity > .arena-strict-gallery{display:block!important;z-index:15!important}
+#activities .activity > .arena-strict-gallery img{display:block!important;z-index:1!important}
+#activities .activity .card-bottom,#activities .activity .detail{z-index:20!important}
+#activities .activity .activity-gallery-status{z-index:30!important}
+#activities .activity .activity-arrows{z-index:31!important}
+#activities .activity:hover .arena-strict-gallery img.is-current{filter:blur(2px) brightness(.70) saturate(.94)!important}
+#activities .activity.suspend-gallery-blur .arena-strict-gallery img.is-current{filter:none!important}
+</style>
+<script id="arena-gallery-layer-repair">
+(()=>{
+ document.querySelectorAll('#activities .activity').forEach(card=>{
+   const controls=card.querySelector('.activity-arrows');
+   if(!controls)return;
+   controls.addEventListener('pointerenter',()=>card.classList.add('suspend-gallery-blur'));
+   controls.addEventListener('pointerleave',()=>card.classList.remove('suspend-gallery-blur'));
+   controls.addEventListener('focusin',()=>card.classList.add('suspend-gallery-blur'));
+   controls.addEventListener('focusout',()=>card.classList.remove('suspend-gallery-blur'));
+ });
+})();
+</script>
