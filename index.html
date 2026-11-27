@@ -634,3 +634,18 @@ body.arena-gate-open{position:fixed!important;inset:0!important;width:100%!impor
 <script id="arena-shooting-card-single-stable-script">
 (()=>{const card=document.querySelector('#activities .shooting-card');if(!card)return;card.classList.add('shooting-card-fixed');card.querySelectorAll(':scope > img,:scope > .clean-gallery,:scope > .shooting-single-photo,:scope > .activity-arrows,:scope > .activity-gallery-status,:scope > .shooting-card-title').forEach(x=>x.remove());let bottom=card.querySelector(':scope > .card-bottom');if(!bottom){bottom=document.createElement('div');bottom.className='card-bottom';card.append(bottom)}const photo=document.createElement('div');photo.className='shooting-single-photo';photo.innerHTML='<img src="assets/arena/shooting-gallery.jpg" alt="Shooting gallery at Arena">';card.prepend(photo);const texts={HY:['Տիր','Նոր մրցակցային խաղային ձևաչափ ձեր երեկոյի համար։'],RU:['Тир','Новый соревновательный формат для вечера.'],EN:['Shooting gallery','A new competitive format for your evening.']};const render=()=>{const lang=document.querySelector('.language button.active')?.dataset.lang||'HY';const t=texts[lang]||texts.HY;bottom.innerHTML='<h3>'+t[0]+'</h3><p>'+t[1]+'</p>'};render();document.querySelectorAll('.language button').forEach(b=>b.addEventListener('click',()=>setTimeout(render,120)))})();
 </script>
+<style id="arena-hero-map-quick-style">
+.hero-map-quick{display:inline-flex;align-items:center;gap:9px;margin-left:10px;padding:0 14px;height:46px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:rgba(8,13,28,.7);color:#fff;vertical-align:middle;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:13px;font-weight:800;transition:transform .22s ease,border-color .22s ease,background .22s ease}.hero-map-quick:hover{transform:translateY(-3px);border-color:var(--lime);background:rgba(31,48,67,.92)}.hero-map-quick svg{width:18px;height:18px;fill:none;stroke:var(--lime);stroke-width:2;flex:0 0 auto}@media(max-width:600px){.hero-map-quick{margin:10px 0 0;height:42px;padding:0 12px;font-size:12px}.hero-map-quick span{white-space:nowrap}}
+</style>
+<script id="arena-hero-map-quick-script">
+(()=>{
+  const hero=document.querySelector('.hero-copy');if(!hero||hero.querySelector('.hero-map-quick'))return;
+  const url='https://www.google.com/maps/search/?api=1&query=Arena%20Entertainment%20Centre%2C%20Mashtots%208%2C%20Yerevan';
+  const pin='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  const link=document.createElement('a');link.className='hero-map-quick';link.href=url;link.target='_blank';link.rel='noopener';link.setAttribute('aria-label','Open Arena location on the map');link.innerHTML=pin+'<span>Մաշտոցի 8</span>';
+  const primary=hero.querySelector('.btn');if(primary)primary.after(link);else hero.append(link);
+  const labels={HY:'Մաշտոցի 8',RU:'пр. Маштоца, 8',EN:'8 Mashtots Ave.'};
+  const render=()=>{const lang=document.querySelector('.language button.active')?.dataset.lang||'HY';link.querySelector('span').textContent=labels[lang]||labels.HY};
+  render();document.querySelectorAll('.language button').forEach(button=>button.addEventListener('click',()=>setTimeout(render,0)));
+})();
+</script>
