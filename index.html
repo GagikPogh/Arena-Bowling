@@ -134,13 +134,17 @@ main > section#activities ~ section{
   .hero-copy{position:relative;z-index:2}
   .arena-hero-ornaments{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
   .arena-hero-ornaments img{position:absolute;display:block;user-select:none;filter:drop-shadow(0 20px 30px #0008);will-change:transform}
-  .arena-hero-cue{width:min(59vw,780px);right:-12vw;top:80px;opacity:.64;transform:rotate(-8deg);mix-blend-mode:screen}
-  .arena-hero-billiards{width:min(28vw,370px);right:4vw;bottom:40px;opacity:.72;transform:rotate(-8deg)}
-  .arena-hero-bowling{width:min(24vw,310px);right:28vw;bottom:-35px;opacity:.54;transform:rotate(8deg)}
-  @media(max-width:900px){.arena-hero-cue{right:-29vw;top:115px;opacity:.34}.arena-hero-billiards{width:270px;right:-46px;opacity:.42}.arena-hero-bowling{display:none}}
-  @media(max-width:600px){.arena-hero-ornaments{display:none}}
+  .arena-hero-ornaments{display:none}
+  .vip{overflow:hidden}
+  .arena-vip-billiards{position:absolute;z-index:1;right:-24px;bottom:-64px;width:min(31vw,430px);pointer-events:none;opacity:.42;transform:rotate(-9deg);filter:drop-shadow(0 22px 28px #000a)}
+  .vip .wrap{position:relative;z-index:2}
+  .arena-end-bowling{position:relative;min-height:170px;overflow:hidden;background:radial-gradient(ellipse at 65% 95%,#6722a845,transparent 42%),#070912}
+  .arena-end-bowling img{position:absolute;right:clamp(18px,9vw,150px);bottom:-128px;width:min(28vw,380px);pointer-events:none;opacity:.56;transform:rotate(8deg);filter:drop-shadow(0 25px 34px #000c)}
+  .arena-end-bowling .wrap{position:relative;z-index:1;padding-top:52px;color:#cbd3e4;font-size:13px}
+  @media(max-width:900px){.arena-vip-billiards{width:300px;right:-95px;opacity:.28}.arena-end-bowling img{width:300px;right:-80px;opacity:.36}}
+  @media(max-width:600px){.arena-vip-billiards,.arena-end-bowling{display:none}}
 </style>
-<script id="arena-hero-ornaments-script">document.addEventListener('DOMContentLoaded',()=>{const hero=document.querySelector('.hero');if(!hero||hero.querySelector('.arena-hero-ornaments'))return;hero.insertAdjacentHTML('beforeend','<div class="arena-hero-ornaments" aria-hidden="true"><img class="arena-hero-cue" src="assets/ornaments/billiards-cue.png" alt=""><img class="arena-hero-billiards" src="assets/ornaments/billiard-balls.png" alt=""><img class="arena-hero-bowling" src="assets/ornaments/bowling-balls.png" alt=""></div>')});</script>
+<script id="arena-ornament-placement-script">document.addEventListener('DOMContentLoaded',()=>{const vip=document.querySelector('#vip');if(vip&&!vip.querySelector('.arena-vip-billiards'))vip.insertAdjacentHTML('beforeend','<img class="arena-vip-billiards" src="assets/ornaments/billiard-balls.png" alt="" aria-hidden="true">');const footer=document.querySelector('.footer');if(footer&&!document.querySelector('.arena-end-bowling'))footer.insertAdjacentHTML('beforebegin','<section class="arena-end-bowling" aria-hidden="true"><div class="wrap">ARENA · BOWLING · BILLIARDS</div><img src="assets/ornaments/bowling-balls.png" alt=""></section>')});</script>
 <style id="arena-neon-trail">
   .arena-neon-trail{position:fixed;z-index:9997;top:0;left:0;width:15px;height:15px;pointer-events:none;border-radius:50%;will-change:transform,opacity,filter;mix-blend-mode:screen;background:radial-gradient(circle at 34% 28%,#fff 0 7%,#b9e85d 10% 19%,#327dff 22% 47%,#151126 50% 100%);box-shadow:0 0 7px #2e8cff,0 0 15px #a14cff,0 0 24px #f050c6;animation:arena-trail-fade .78s ease-out forwards}
   .arena-neon-trail.is-billiard{background:radial-gradient(circle at 35% 27%,#fff 0 7%,#ff5cc6 10% 17%,#5c197d 20% 49%,#100d1f 52% 100%);box-shadow:0 0 7px #f350c4,0 0 17px #914cff,0 0 25px #376eff}
