@@ -575,3 +575,65 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  setShooting('HY');document.querySelectorAll('.language button').forEach(button=>button.addEventListener('click',()=>setTimeout(()=>setShooting(button.dataset.lang),140)));
 })();
 </script>
+
+
+<style id="arena-card-arrows-unified-final">
+#activities .activity{isolation:isolate}
+#activities .activity .arena-card-gallery{position:absolute!important;inset:0!important;z-index:-2!important;overflow:hidden!important;background:#080717}
+#activities .activity .arena-card-slide{position:absolute!important;inset:0!important;display:block!important;opacity:0!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important;transform:scale(1.025);transition:opacity .32s ease,transform .52s ease!important}
+#activities .activity .arena-card-slide.is-active{opacity:1!important;transform:scale(1)!important}
+#activities .activity .activity-arrows{position:absolute!important;right:14px!important;top:14px!important;display:flex!important;gap:7px!important;z-index:99!important;pointer-events:auto!important}
+#activities .activity .activity-arrows .activity-arrow{position:static!important;display:grid!important;place-items:center!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important}
+#activities .activity:hover .activity-arrows{opacity:1!important;visibility:visible!important}
+@media(max-width:700px){#activities .activity .activity-arrows{right:10px!important;top:10px!important}}
+</style>
+<script id="arena-card-arrows-unified-final">
+(()=>{
+ const cards=[...document.querySelectorAll('#activities .activity')];
+ const specified={
+  0:['assets/arena/bowling-hall.jpg','assets/arena/bowling-club.jpg'],
+  3:['assets/arena/arcade-basketball.jpg','assets/arena/arcade-punch.jpg','assets/arena/arcade-prizes.jpg'],
+  4:['assets/arena/shooting-gallery.jpg']
+ };
+ cards.forEach((card,index)=>{
+   const original=card.querySelector('img');
+   const originalSrc=original?.currentSrc||original?.getAttribute('src')||'';
+   const photos=specified[index]||[originalSrc];
+   if(!photos[0])return;
+   original?.remove();
+   card.querySelector('.bowling-gallery,.arena-arcade-gallery,.arena-card-gallery')?.remove();
+   const gallery=document.createElement('div');
+   gallery.className='arena-card-gallery';
+   gallery.setAttribute('aria-label','Ֆոտոշարք');
+   const slides=[];
+   const sources=photos.length===1?[photos[0],photos[0]]:photos;
+   sources.forEach((url,position)=>{
+     const slide=document.createElement('div');
+     slide.className='arena-card-slide'+(position===0?' is-active':'');
+     slide.style.backgroundImage='url("'+url.replace(/"/g,'%22')+'")';
+     if(sources.length===2&&sources[0]===sources[1]&&position===1){
+       slide.style.backgroundSize='118%';
+       slide.style.backgroundPosition='62% center';
+     }
+     gallery.append(slide);slides.push(slide);
+   });
+   card.prepend(gallery);
+   card.querySelector('.activity-arrows')?.remove();
+   const controls=document.createElement('div');controls.className='activity-arrows';
+   const previous=document.createElement('button'),next=document.createElement('button');
+   previous.type=next.type='button';
+   previous.className=next.className='activity-arrow';
+   previous.textContent='‹';next.textContent='›';
+   previous.setAttribute('aria-label','Նախորդ լուսանկարը');
+   next.setAttribute('aria-label','Հաջորդ լուսանկարը');
+   controls.append(previous,next);card.append(controls);
+   let current=0;
+   const render=delta=>{
+     current=(current+delta+slides.length)%slides.length;
+     slides.forEach((slide,position)=>slide.classList.toggle('is-active',position===current));
+   };
+   previous.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();render(-1)});
+   next.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();render(1)});
+ });
+})();
+</script>
