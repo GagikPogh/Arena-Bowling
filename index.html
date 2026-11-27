@@ -293,38 +293,60 @@ main>section#activities,main>section#activities~section{min-height:100svh}
 })();
 </script>
 <style id="arena-access-gate">
-.arena-gate{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 80% 8%,#4d2f8e75,transparent 36%),linear-gradient(135deg,#060914 0%,#111a35 55%,#071022 100%);color:#f6f7fb}
-.arena-gate[hidden]{display:none}
-.arena-gate__card{width:min(440px,100%);padding:34px;border:1px solid #ffffff26;border-radius:22px;background:#0c1325e8;box-shadow:0 30px 90px #0009;backdrop-filter:blur(20px);text-align:center}
-.arena-gate__logo{width:160px;height:72px;object-fit:contain;margin:0 auto 16px}
-.arena-gate h1{font:800 clamp(30px,7vw,45px)/1 Space Grotesk,sans-serif;letter-spacing:-.055em;margin:0 0 12px}
-.arena-gate p{margin:0 0 24px;color:#cbd3e4;line-height:1.55}
-.arena-gate form{display:grid;gap:11px}
-.arena-gate label{text-align:left;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#c8e85d}
-.arena-gate input{width:100%;padding:15px 16px;border:1px solid #ffffff2b;border-radius:10px;background:#060b16;color:#fff;font:700 20px/1.2 Manrope,sans-serif;letter-spacing:.18em;text-align:center;outline:none}
-.arena-gate input:focus{border-color:#c8e85d;box-shadow:0 0 0 4px #c8e85d22}
-.arena-gate button{border:0;border-radius:10px;padding:15px;background:#c8e85d;color:#101724;font:800 14px Manrope,sans-serif;cursor:pointer}
-.arena-gate__error{min-height:20px;margin:2px 0 0;color:#ff98b6;font-size:13px}
+html.arena-gate-open,body.arena-gate-open{height:100%!important;overflow:hidden!important;overscroll-behavior:none!important}
+body.arena-gate-open{position:fixed!important;inset:0!important;width:100%!important;touch-action:none!important}
+.arena-gate{position:fixed!important;inset:0!important;z-index:99999!important;display:grid!important;place-items:center!important;width:100vw!important;width:100dvw!important;height:100vh!important;height:100dvh!important;min-height:100svh!important;overflow:hidden!important;overscroll-behavior:none!important;padding:max(18px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left))!important;background:linear-gradient(135deg,rgba(5,8,19,.78),rgba(11,20,44,.72))!important;backdrop-filter:blur(9px) saturate(1.08)!important;-webkit-backdrop-filter:blur(9px) saturate(1.08)!important;color:#f6f7fb}
+.arena-gate::before{content:""!important;position:absolute!important;inset:-20%!important;z-index:-1!important;background:radial-gradient(circle at 18% 18%,#b9e85d22,transparent 28%),radial-gradient(circle at 82% 10%,#6d44c877,transparent 31%),radial-gradient(circle at 50% 100%,#116dff3d,transparent 36%)!important;filter:blur(18px)!important}
+.arena-gate[hidden]{display:none!important}
+.arena-gate__card{position:relative!important;width:min(440px,100%)!important;max-height:calc(100dvh - 36px)!important;overflow:hidden!important;padding:clamp(24px,6vw,36px)!important;border:1px solid #ffffff2b!important;border-radius:24px!important;background:linear-gradient(145deg,#10182ded,#080e1ee8)!important;box-shadow:0 28px 90px #000a, inset 0 1px 0 #ffffff17!important;backdrop-filter:blur(18px)!important;text-align:center!important;animation:arenaGateIn .38s cubic-bezier(.2,.8,.2,1) both}
+@keyframes arenaGateIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.arena-gate__logo-wrap{display:grid!important;place-items:center!important;min-height:62px!important;margin:0 auto 15px!important}
+.arena-gate__logo{width:172px!important;height:62px!important;max-width:75vw!important;object-fit:contain!important;object-position:center!important;filter:drop-shadow(0 10px 18px #0007)!important}
+.arena-gate__brand-fallback{display:none!important;color:#fff!important;font:800 25px/1 Space Grotesk,Arial,sans-serif!important;letter-spacing:.12em!important}
+.arena-gate__logo-wrap.is-fallback .arena-gate__logo{display:none!important}
+.arena-gate__logo-wrap.is-fallback .arena-gate__brand-fallback{display:block!important}
+.arena-gate h1{font:800 clamp(29px,7vw,45px)/1 Space Grotesk,sans-serif!important;letter-spacing:-.055em!important;margin:0 0 12px!important}
+.arena-gate p{max-width:330px!important;margin:0 auto 24px!important;color:#cbd3e4!important;line-height:1.55!important}
+.arena-gate form{display:grid!important;gap:11px!important}
+.arena-gate label{text-align:left!important;font-size:12px!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:#c8e85d!important}
+.arena-gate input{box-sizing:border-box!important;width:100%!important;padding:15px 16px!important;border:1px solid #ffffff2b!important;border-radius:11px!important;background:#060b16!important;color:#fff!important;font:700 16px/1.2 Manrope,sans-serif!important;letter-spacing:.18em!important;text-align:center!important;outline:none!important}
+.arena-gate input:focus{border-color:#c8e85d!important;box-shadow:0 0 0 4px #c8e85d22!important}
+.arena-gate button{border:0!important;border-radius:11px!important;padding:15px!important;background:linear-gradient(135deg,#d2ff70,#a9dc4a)!important;color:#101724!important;font:800 14px Manrope,sans-serif!important;cursor:pointer!important;box-shadow:0 12px 28px #a6d64f2b!important}
+.arena-gate__error{min-height:20px!important;margin:2px 0 0!important;color:#ff98b6!important;font-size:13px!important}
+@media(max-width:600px){.arena-gate{align-items:center!important;padding:16px!important}.arena-gate__card{padding:26px 22px!important;border-radius:20px!important}.arena-gate__logo-wrap{min-height:54px!important;margin-bottom:11px!important}.arena-gate__logo{width:146px!important;height:54px!important}.arena-gate p{font-size:14px!important;margin-bottom:20px!important}.arena-gate input,.arena-gate button{min-height:52px!important}.arena-gate h1{font-size:31px!important}}
 </style>
 <script id="arena-access-gate-script">
 (()=>{
  const key='arena_beta_access_v1';
  if(sessionStorage.getItem(key)==='granted')return;
- const logo=document.querySelector('.logo')?.src||'';
+ const root=document.documentElement,body=document.body;
+ const scrollY=window.scrollY||window.pageYOffset||0;
+ const locked={overflow:body.style.overflow,position:body.style.position,top:body.style.top,width:body.style.width};
+ const lock=()=>{
+   root.classList.add('arena-gate-open');body.classList.add('arena-gate-open');
+   body.style.overflow='hidden';body.style.position='fixed';body.style.top=(-scrollY)+'px';body.style.width='100%';
+ };
+ const unlock=()=>{
+   root.classList.remove('arena-gate-open');body.classList.remove('arena-gate-open');
+   body.style.overflow=locked.overflow;body.style.position=locked.position;body.style.top=locked.top;body.style.width=locked.width;
+   requestAnimationFrame(()=>window.scrollTo(0,scrollY));
+ };
  const gate=document.createElement('div');
  gate.className='arena-gate';gate.id='arena-access-gate';
  gate.innerHTML='<div class="arena-gate__card" role="dialog" aria-modal="true" aria-labelledby="arena-gate-title">'+
-   (logo?'<img class="arena-gate__logo" src="'+logo+'" alt="Arena High">':'')+
+   '<div class="arena-gate__logo-wrap"><img class="arena-gate__logo" src="/dist/arena-high-logo.png" alt="Arena High" onerror="this.parentElement.classList.add(\'is-fallback\')"><span class="arena-gate__brand-fallback" aria-hidden="true">ARENA</span></div>'+
    '<h1 id="arena-gate-title">Բետա մուտք</h1><p>Կայքը փորձնական տարբերակում է։ Մուտք գործելու համար գրեք գաղտնաբառը։</p>'+
    '<form><label for="arena-gate-password">Գաղտնաբառ</label><input id="arena-gate-password" type="password" inputmode="numeric" autocomplete="current-password" required autofocus><button type="submit">Մուտք գործել</button><div class="arena-gate__error" aria-live="polite"></div></form></div>';
- document.body.append(gate);
+ lock();body.append(gate);
  const input=gate.querySelector('input'),error=gate.querySelector('.arena-gate__error');
- gate.querySelector('form').addEventListener('submit',e=>{
-   e.preventDefault();
-   if(input.value==='1177'){sessionStorage.setItem(key,'granted');gate.remove();document.body.style.overflow='';}
+ gate.addEventListener('touchmove',event=>event.preventDefault(),{passive:false});
+ gate.addEventListener('wheel',event=>event.preventDefault(),{passive:false});
+ gate.querySelector('form').addEventListener('submit',event=>{
+   event.preventDefault();
+   if(input.value==='1177'){sessionStorage.setItem(key,'granted');gate.remove();unlock();}
    else{error.textContent='Գաղտնաբառը սխալ է։ Փորձեք կրկին։';input.value='';input.focus();}
  });
- document.body.style.overflow='hidden';setTimeout(()=>input.focus(),0);
+ setTimeout(()=>input.focus({preventScroll:true}),0);
 })();
 </script><style id="arena-mobile-header-repair">
 @media(max-width:700px){
