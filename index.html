@@ -130,6 +130,40 @@ main > section#activities ~ section{
 <script>
 (()=>{const nav=document.querySelector('.nav');const langs=document.createElement('div');langs.className='language';langs.innerHTML='<button class="active" data-lang="RU">RU</button><button data-lang="HY">ՀՅ</button><button data-lang="EN">EN</button>';nav.insertBefore(langs,nav.lastElementChild);langs.onclick=e=>{if(e.target.tagName==='BUTTON'){langs.querySelectorAll('button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active')}};const hours=document.querySelector('.pills span:last-child');if(hours){hours.textContent='Ежедневно: 10:00–00:00';hours.classList.add('hours')}const form=document.querySelector('.bookform');const note=document.createElement('div');note.className='field note-field';note.innerHTML='<label>Заметка</label><textarea placeholder="Например: количество гостей, пожелания по VIP-комнате"></textarea>';form.insertBefore(note,form.lastElementChild);const section=document.querySelector('#activities .top');const controls=document.createElement('div');controls.className='activity-controls';controls.innerHTML='<button class="round" aria-label="Предыдущее фото">‹</button><button class="round" aria-label="Следующее фото">›</button>';section.append(controls);const pictures=['https://fithub.am/storage/partners/images/01KNH8YAZHJQ4DMCMZ4QT7FXG1.jpg','https://visityerevan.am/media/images/b335495790_225398059901486_7834341483426245308_n.jpg','https://visityerevan.am/media/images/b335495790_225398059901486_7834341483426245308_n.jpg','https://fithub.am/storage/partners/images/01KNH8YB0JKNJ5CRHNC6BVEXCD.jpg','https://visityerevan.am/media/images/b307691267_5331897520261815_5004576569201719464_n.jpg','https://i.pinimg.com/736x/09/f0/3d/09f03dbec54b92c409ae1836e0db4408.jpg'];let i=0;const imgs=[...document.querySelectorAll('.activity img')];const change=dir=>{i=(i+dir+pictures.length)%pictures.length;imgs.forEach((img,n)=>{img.parentElement.classList.add('changing');setTimeout(()=>{img.src=pictures[(i+n)%pictures.length];img.parentElement.classList.remove('changing')},260)})};controls.children[0].onclick=()=>change(-1);controls.children[1].onclick=()=>change(1);setInterval(()=>change(1),6500)})();
 </script>
+<style id="arena-mobile-card-tap-style">
+/* Touch screens do not have a persistent hover state: a tap reveals the card copy. */
+@media (hover: none), (pointer: coarse){
+  #activities .activity.mobile-card-open .clean-gallery img.is-active,
+  #activities .activity.mobile-card-open > img,
+  .menu-card.mobile-card-open img{
+    filter:blur(1px) brightness(.82)!important;
+    transform:scale(1.025)!important;
+  }
+  #activities .activity.mobile-card-open .card-bottom{opacity:0!important;transform:translateY(-10px)!important}
+  #activities .activity.mobile-card-open .detail{opacity:1!important;transform:none!important;pointer-events:auto!important}
+  .menu-card.mobile-card-open .menu-title{opacity:0!important;transform:translateY(-10px)!important}
+  .menu-card.mobile-card-open .prices{opacity:1!important;transform:none!important;pointer-events:auto!important}
+  /* Gallery controls stay visually clear and handle their own taps. */
+  #activities .activity.mobile-card-open.gallery-control-focus .clean-gallery img.is-active{filter:none!important;transform:scale(1)!important}
+}
+</style>
+<script id="arena-mobile-card-tap">
+(()=>{
+  const touchScreen=window.matchMedia('(hover: none), (pointer: coarse)');
+  if(!touchScreen.matches)return;
+  const cardSelector='#activities .activity, .menu-card';
+  document.addEventListener('click',event=>{
+    /* Buttons and links must keep their native behaviour (including gallery arrows). */
+    if(event.target.closest('button,a,input,select,textarea,label,.activity-arrows,.gallery-control'))return;
+    const card=event.target.closest(cardSelector);
+    if(!card)return;
+    document.querySelectorAll(cardSelector+'.mobile-card-open').forEach(other=>{
+      if(other!==card)other.classList.remove('mobile-card-open');
+    });
+    card.classList.toggle('mobile-card-open');
+  });
+})();
+</script>
 <style id="arena-hero-ornaments">
   .hero-copy{position:relative;z-index:2}
   .arena-hero-ornaments{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
