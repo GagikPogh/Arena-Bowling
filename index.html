@@ -564,7 +564,7 @@ main>section#activities,main>section#activities~section{min-height:100svh}
  const setShooting=lang=>{
    const card=cards[4];if(!card)return;
    const copy={
-     HY:['Թիր','Նոր մրցակցային ձևաչափ՝ երեկոյի համար։','Ավելացրեք խաղային լարում','Մանրամասներն ու առկայությունը ճշտեք հեռախոսով։'],
+     HY:['Տիր','Նոր մրցակցային ձևաչափ՝ երեկոյի համար։','Ավելացրեք խաղային լարում','Մանրամասներն ու առկայությունը ճշտեք հեռախոսով։'],
      RU:['Тир','Новый соревновательный формат для вечера.','Больше игры и эмоций','Детали и доступность уточняйте по телефону.'],
      EN:['Shooting gallery','A new competitive activity for your evening.','More play, more excitement','Call us for details and availability.']
    }[lang]||[];
@@ -743,6 +743,70 @@ main>section#activities,main>section#activities~section{min-height:100svh}
    next.onpointerup=event=>pointer(event,1);
    previous.onclick=event=>{if(Date.now()-lastPointer<450){event.preventDefault();return}pointer(event,-1)};
    next.onclick=event=>{if(Date.now()-lastPointer<450){event.preventDefault();return}pointer(event,1)};
+ });
+})();
+</script>
+
+<style id="arena-strict-photo-galleries">
+#activities .activity .arena-strict-gallery{position:absolute!important;inset:0!important;z-index:0!important;overflow:hidden!important;background:#090719!important;pointer-events:none!important}
+#activities .activity .arena-strict-gallery img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;opacity:0!important;transform:scale(1.045)!important;transition:opacity .55s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1),filter .42s ease!important;will-change:opacity,transform,filter}
+#activities .activity .arena-strict-gallery img.is-current{opacity:1!important;transform:scale(1)!important}
+#activities .activity:hover .arena-strict-gallery img.is-current{filter:blur(6px) brightness(.57) saturate(.88)!important;transform:scale(1.045)!important}
+#activities .activity .card-bottom,#activities .activity .detail{z-index:5!important}
+#activities .activity .activity-gallery-status{z-index:30!important}
+#activities .activity .activity-arrows{z-index:31!important}
+</style>
+<script id="arena-strict-photo-galleries">
+(()=>{
+ const cards=[...document.querySelectorAll('#activities .activity')];
+ const galleries=[
+  ['assets/arena/bowling-hall.jpg','assets/arena/bowling-club.jpg'],
+  ['https://fithub.am/storage/partners/images/01KNH8YB09TVKXETDZ0Q5GMPGB.jpg'],
+  ['https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/58/46/4f/arena-entertainment-centre.jpg?h=1200&s=1&w=1200'],
+  ['assets/arena/arcade-basketball.jpg','assets/arena/arcade-punch.jpg','assets/arena/arcade-prizes.jpg'],
+  ['assets/arena/shooting-gallery.jpg']
+ ];
+ cards.forEach((card,index)=>{
+   const photos=galleries[index];if(!photos)return;
+   card.querySelector('img')?.remove();
+   card.querySelector('.bowling-gallery,.arena-arcade-gallery,.arena-card-gallery,.arena-visual-gallery,.arena-strict-gallery')?.remove();
+   card.querySelector('.activity-arrows')?.remove();card.querySelector('.activity-gallery-status')?.remove();
+   const gallery=document.createElement('div');gallery.className='arena-strict-gallery';
+   const frames=photos.map((src,position)=>{
+     const image=document.createElement('img');
+     image.src=src;image.alt='';image.decoding='async';
+     image.className=position===0?'is-current':'';
+     gallery.append(image);return image;
+   });
+   card.prepend(gallery);
+   const status=document.createElement('div');status.className='activity-gallery-status';
+   const current=document.createElement('span');current.className='current';current.textContent='1';
+   const slash=document.createElement('span');slash.className='slash';slash.textContent='/';
+   const total=document.createElement('span');total.textContent=String(frames.length);
+   status.append(current,slash,total);
+   const controls=document.createElement('div');controls.className='activity-arrows';
+   const prev=document.createElement('button'),next=document.createElement('button');
+   prev.type=next.type='button';prev.className=next.className='activity-arrow';
+   prev.textContent='‹';next.textContent='›';
+   prev.setAttribute('aria-label','Նախորդ լուսանկարը');next.setAttribute('aria-label','Հաջորդ լուսանկարը');
+   controls.append(prev,next);card.append(status,controls);
+   let active=0;
+   const show=delta=>{
+     if(frames.length<2)return;
+     active=(active+delta+frames.length)%frames.length;
+     frames.forEach((frame,position)=>frame.classList.toggle('is-current',position===active));
+     current.textContent=String(active+1);
+   };
+   if(frames.length===1){prev.disabled=true;next.disabled=true;return;}
+   let lastPointer=0;
+   const action=(event,delta)=>{
+     event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
+     lastPointer=Date.now();show(delta);
+   };
+   prev.onpointerup=event=>action(event,-1);
+   next.onpointerup=event=>action(event,1);
+   prev.onclick=event=>{if(Date.now()-lastPointer<450){event.preventDefault();return}action(event,-1)};
+   next.onclick=event=>{if(Date.now()-lastPointer<450){event.preventDefault();return}action(event,1)};
  });
 })();
 </script>
