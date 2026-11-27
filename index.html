@@ -136,9 +136,6 @@ main > section#activities ~ section{
   .arena-neon-trail::after{content:"8";position:absolute;inset:4px;border-radius:50%;display:grid;place-items:center;background:#f5f6fb;color:#16121e;font:700 5px/1 Arial,sans-serif;opacity:.72}
   .arena-neon-trail.is-bowling::after{content:"";inset:4px;background:radial-gradient(circle at 34% 35%,#05060d 0 16%,transparent 18% 100%)}
   @keyframes arena-trail-fade{0%{opacity:var(--trail-opacity,.9);transform:translate3d(var(--trail-x),var(--trail-y),0) scale(1)}100%{opacity:0;transform:translate3d(var(--trail-x),calc(var(--trail-y) + 16px),0) scale(.12);filter:blur(2px)}}
-  .arena-header-lights{pointer-events:none;position:absolute;top:100%;left:50%;z-index:1;width:min(450px,44vw);height:96px;transform:translateX(-50%);background:url('assets/ornaments/neon-hanging-lights.png') center top/contain no-repeat;opacity:.42;filter:drop-shadow(0 12px 18px #a243ff55);mask-image:linear-gradient(#000 0 70%,transparent);-webkit-mask-image:linear-gradient(#000 0 70%,transparent)}
-  @media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.arena-header-lights{display:none!important}}
-  @media(max-width:700px){.arena-header-lights{display:none!important}}
 </style>
 <script id="arena-neon-trail-script">
 (()=>{
@@ -151,7 +148,6 @@ main > section#activities ~ section{
   document.addEventListener('visibilitychange',()=>{enabled=!document.hidden});
 })();
 </script>
-<script id="arena-header-lights-script">document.addEventListener('DOMContentLoaded',()=>{const header=document.querySelector('.nav-shell');if(header&&!header.querySelector('.arena-header-lights'))header.insertAdjacentHTML('beforeend','<span class="arena-header-lights" aria-hidden="true"></span>')});</script>
 <style>html,body{width:100%;max-width:100%;overflow-x:clip}@supports not (overflow:clip){html,body{overflow-x:hidden}}</style>
 <script>document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('img[src="dist/arena-high-logo.png"]').forEach(img=>img.src='dist/arena-high-logo.png'));</script>
 <style>
