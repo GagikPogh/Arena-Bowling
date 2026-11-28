@@ -130,32 +130,6 @@ main > section#activities ~ section{
 <script>
 (()=>{const nav=document.querySelector('.nav');const langs=document.createElement('div');langs.className='language';langs.innerHTML='<button class="active" data-lang="RU">RU</button><button data-lang="HY">ՀՅ</button><button data-lang="EN">EN</button>';nav.insertBefore(langs,nav.lastElementChild);langs.onclick=e=>{if(e.target.tagName==='BUTTON'){langs.querySelectorAll('button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active')}};const hours=document.querySelector('.pills span:last-child');if(hours){hours.textContent='Ежедневно: 10:00–00:00';hours.classList.add('hours')}const form=document.querySelector('.bookform');const note=document.createElement('div');note.className='field note-field';note.innerHTML='<label>Заметка</label><textarea placeholder="Например: количество гостей, пожелания по VIP-комнате"></textarea>';form.insertBefore(note,form.lastElementChild);const section=document.querySelector('#activities .top');const controls=document.createElement('div');controls.className='activity-controls';controls.innerHTML='<button class="round" aria-label="Предыдущее фото">‹</button><button class="round" aria-label="Следующее фото">›</button>';section.append(controls);const pictures=['https://fithub.am/storage/partners/images/01KNH8YAZHJQ4DMCMZ4QT7FXG1.jpg','https://visityerevan.am/media/images/b335495790_225398059901486_7834341483426245308_n.jpg','https://visityerevan.am/media/images/b335495790_225398059901486_7834341483426245308_n.jpg','https://fithub.am/storage/partners/images/01KNH8YB0JKNJ5CRHNC6BVEXCD.jpg','https://visityerevan.am/media/images/b307691267_5331897520261815_5004576569201719464_n.jpg','https://i.pinimg.com/736x/09/f0/3d/09f03dbec54b92c409ae1836e0db4408.jpg'];let i=0;const imgs=[...document.querySelectorAll('.activity img')];const change=dir=>{i=(i+dir+pictures.length)%pictures.length;imgs.forEach((img,n)=>{img.parentElement.classList.add('changing');setTimeout(()=>{img.src=pictures[(i+n)%pictures.length];img.parentElement.classList.remove('changing')},260)})};controls.children[0].onclick=()=>change(-1);controls.children[1].onclick=()=>change(1);setInterval(()=>change(1),6500)})();
 </script>
-<style id="arena-original-logo-and-contact-style">
-.nav .logo{display:block!important;width:154px!important;height:50px!important;object-fit:contain!important;object-position:left center!important}
-.hero-contact-quick{display:inline-flex;align-items:center;gap:8px;margin:10px 0 0;color:#fff;font-size:13px;font-weight:800}.hero-contact-quick:before{content:'☎';color:var(--lime);font-size:17px}.hero-contact-quick:hover{color:var(--lime)}
-@media(max-width:600px){.nav .logo{width:118px!important;height:42px!important}.hero-contact-quick{font-size:12px}}
-</style>
-<script id="arena-original-logo-and-contact-script">
-(()=>{
-  const phoneDisplay='+374 44 126 363', phoneLink='+37444126363', email='Pogh.gag@gmail.com', logo='assets/arena/arena-original-logo.png';
-  const render=()=>{
-    document.querySelectorAll('img.logo,.arena-gate__logo,.arena-end-logo img').forEach(image=>{image.src=logo;image.alt='Arena Bowling & Billiards Club'});
-    document.querySelectorAll('a[href^="tel:"]').forEach(link=>{link.href='tel:'+phoneLink;link.textContent=phoneDisplay});
-    document.querySelectorAll('a[href^="mailto:"]').forEach(link=>{link.href='mailto:'+email;link.textContent=email});
-    const hero=document.querySelector('.hero-copy');
-    if(hero&&!hero.querySelector('.hero-contact-quick')){
-      const link=document.createElement('a');link.className='hero-contact-quick';link.href='tel:'+phoneLink;link.textContent=phoneDisplay;hero.append(link);
-    }
-    const line=document.querySelector('.contactline');
-    if(line&&!line.querySelector('.arena-owner-email')){
-      const mail=document.createElement('a');mail.className='arena-owner-email';mail.href='mailto:'+email;mail.textContent=email;
-      line.append(document.createTextNode(' · '),mail);
-    }
-  };
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
-  window.addEventListener('load',()=>{render();setTimeout(render,450)});
-})();
-</script>
 <script id="arena-complete-i18n">
 (()=>{
   const t={
@@ -482,7 +456,7 @@ body.arena-gate-open{position:fixed!important;inset:0!important;width:100%!impor
  const gate=document.createElement('div');
  gate.className='arena-gate';gate.id='arena-access-gate';
  gate.innerHTML='<div class="arena-gate__card" role="dialog" aria-modal="true" aria-labelledby="arena-gate-title">'+
-   '<div class="arena-gate__logo-wrap"><img class="arena-gate__logo" src="assets/arena/arena-original-logo.png" alt="Arena Bowling & Billiards Club" onerror="this.parentElement.classList.add(\'is-fallback\')"><span class="arena-gate__brand-fallback" aria-hidden="true">ARENA</span></div>'+
+   '<div class="arena-gate__logo-wrap"><img class="arena-gate__logo" src="dist/arena-high-logo.svg" alt="Arena" onerror="this.parentElement.classList.add(\'is-fallback\')"><span class="arena-gate__brand-fallback" aria-hidden="true">ARENA</span></div>'+
    '<h1 id="arena-gate-title">Բետա մուտք</h1><p>Կայքը փորձնական տարբերակում է։ Մուտք գործելու համար գրեք գաղտնաբառը։</p>'+
    '<form><label for="arena-gate-password">Գաղտնաբառ</label><input id="arena-gate-password" type="password" inputmode="numeric" autocomplete="current-password" required autofocus><button type="submit">Մուտք գործել</button><div class="arena-gate__error" aria-live="polite"></div></form></div>';
  lock();body.append(gate);
