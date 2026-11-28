@@ -456,7 +456,7 @@ body.arena-gate-open{position:fixed!important;inset:0!important;width:100%!impor
  const gate=document.createElement('div');
  gate.className='arena-gate';gate.id='arena-access-gate';
  gate.innerHTML='<div class="arena-gate__card" role="dialog" aria-modal="true" aria-labelledby="arena-gate-title">'+
-   '<div class="arena-gate__logo-wrap"><img class="arena-gate__logo" src="/dist/arena-high-logo.svg" alt="Arena High" onerror="this.parentElement.classList.add(\'is-fallback\')"><span class="arena-gate__brand-fallback" aria-hidden="true">ARENA</span></div>'+
+   '<div class="arena-gate__logo-wrap"><img class="arena-gate__logo" src="dist/arena-high-logo.svg" alt="Arena" onerror="this.parentElement.classList.add(\'is-fallback\')"><span class="arena-gate__brand-fallback" aria-hidden="true">ARENA</span></div>'+
    '<h1 id="arena-gate-title">Բետա մուտք</h1><p>Կայքը փորձնական տարբերակում է։ Մուտք գործելու համար գրեք գաղտնաբառը։</p>'+
    '<form><label for="arena-gate-password">Գաղտնաբառ</label><input id="arena-gate-password" type="password" inputmode="numeric" autocomplete="current-password" required autofocus><button type="submit">Մուտք գործել</button><div class="arena-gate__error" aria-live="polite"></div></form></div>';
  lock();body.append(gate);
